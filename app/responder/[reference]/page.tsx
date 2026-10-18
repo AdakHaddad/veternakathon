@@ -116,7 +116,7 @@ export default async function ResponderReportPage({
             />
             <Row label="Kontak pelapor" value={report.reporter_contact ?? "(tidak diisi)"} />
           </dl>
-          <p className="mt-2 text-xs text-stone-500">
+          <p className="mt-2 text-xs text-stone-700">
             Data Batasi ini hanya untuk kebutuhan operasional. Jangan
             memperlihatkan di muka umum. Laporan itu masih data SIMULASI.
           </p>
@@ -204,7 +204,7 @@ export default async function ResponderReportPage({
             >
               Simpan perubahan
             </button>
-            <p className="text-xs text-stone-500">
+            <p className="text-xs text-stone-700">
               Perubahan dan siapa yang mengubahnya (actor) tercatat lengkap di
               riwayat dan audit.
             </p>
@@ -219,7 +219,7 @@ export default async function ResponderReportPage({
             <li key={a.id} className="border-b pb-2 last:border-0">
               <p className="font-medium">{ACTION_LABEL[a.action_type] ?? a.action_type}</p>
               {a.note ? <p className="text-stone-600">{a.note}</p> : null}
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-stone-600">
                 {new Date(a.created_at).toLocaleString("id-ID")} — {a.actor_name}
               </p>
             </li>
@@ -233,7 +233,7 @@ export default async function ResponderReportPage({
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex gap-2">
-      <span className="w-40 shrink-0 text-xs uppercase tracking-wide text-stone-400">
+      <span className="w-40 shrink-0 text-xs uppercase tracking-wide text-stone-600">
         {label}
       </span>
       <span>{value}</span>

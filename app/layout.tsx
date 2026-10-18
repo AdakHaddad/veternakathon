@@ -66,7 +66,7 @@ export default async function RootLayout({
           </div>
         </header>
         <main className="mx-auto max-w-4xl px-4 py-6">{children}</main>
-        <footer className="mx-auto max-w-4xl px-4 pb-10 pt-4 text-xs text-stone-500">
+        <footer className="mx-auto max-w-4xl px-4 pb-10 pt-4 text-xs text-stone-700">
           VET-REGION — prototipe untuk kompetisi (data simulasi). Status
           &ldquo;Ditutup&rdquo; berarti alur administrasi selesai, bukan bukti
           hewan sembuh. Keputusan klinis dan klaim luar biasa tetap menjadi

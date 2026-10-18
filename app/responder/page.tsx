@@ -34,7 +34,7 @@ export default async function ResponderQueuePage({
 
       <ul className="divide-y rounded-lg border bg-white">
         {queue.length === 0 ? (
-          <li className="p-4 text-sm text-stone-500">
+          <li className="p-4 text-sm text-stone-700">
             Antrean kosong (untuk uji coba).
           </li>
         ) : null}

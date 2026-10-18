@@ -48,7 +48,7 @@ export default async function DashboardPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-xs text-stone-500">
+        <p className="mt-2 text-xs text-stone-700">
           &ldquo;Ditutup&rdquo; berarti alur administrasi selesai, bukan bukti
           hewan sembuh. Hasil (outcome) terpisah dari status alur.
         </p>
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
         <h2 className="font-semibold">Berdasar sub-wilayah (agregat)</h2>
         <table className="mt-2 w-full text-sm">
           <thead>
-            <tr className="text-left text-xs uppercase tracking-wide text-stone-400">
+            <tr className="text-left text-xs uppercase tracking-wide text-stone-600">
               <th className="py-1">Sub-wilayah</th>
               <th className="py-1 text-right">Laporan</th>
               <th className="py-1 text-right">Belum terverifikasi</th>
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
             ))}
           </tbody>
         </table>
-        <p className="mt-2 text-xs text-stone-500">
+        <p className="mt-2 text-xs text-stone-700">
           Jika jumlah di suatu area terlalu kecil pada penerapan nyata, angka
           dan lokasi bisa ditekan untuk melindungi identitas peternak (rule of
           suppression). Prototipe ini menampilkan wilayah agregat, bukan
@@ -114,9 +114,9 @@ function Stat({
 }) {
   return (
     <div className="rounded-lg border bg-white p-4">
-      <p className="text-xs uppercase tracking-wide text-stone-400">{label}</p>
+      <p className="text-xs uppercase tracking-wide text-stone-600">{label}</p>
       <p className="mt-1 text-3xl font-bold">{value}</p>
-      {hint ? <p className="mt-1 text-xs text-stone-500">{hint}</p> : null}
+      {hint ? <p className="mt-1 text-xs text-stone-700">{hint}</p> : null}
     </div>
   );
 }

@@ -21,12 +21,12 @@ export default function EdukasiPage() {
             href={`/edukasi/${e.id}`}
             className="block rounded-lg border bg-white p-4 hover:border-emerald-600"
           >
-            <p className="text-xs uppercase tracking-wide text-stone-400">
+            <p className="text-xs uppercase tracking-wide text-stone-600">
               {e.topic}
             </p>
             <p className="mt-1 font-semibold">{e.title}</p>
             <p className="mt-1 text-sm text-stone-600">{e.summary}</p>
-            <p className="mt-2 text-xs text-stone-500">
+            <p className="mt-2 text-xs text-stone-700">
               Untuk: {e.species_scope.join(", ")} · Sumber: {e.source_name}
             </p>
           </Link>

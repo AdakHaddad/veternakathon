@@ -77,7 +77,7 @@ export default async function LaporkanPage({
         <fieldset className="space-y-2">
           <legend className="font-semibold">3. Kapan tanda pertama terlihat?</legend>
           <input type="date" name="onset_at" className="rounded border p-2 text-sm" />
-          <p className="text-xs text-stone-500">Boleh dikosongkan jika tidak pasti.</p>
+          <p className="text-xs text-stone-700">Boleh dikosongkan jika tidak pasti.</p>
         </fieldset>
 
         <fieldset className="space-y-2">
@@ -122,7 +122,7 @@ export default async function LaporkanPage({
             placeholder="Detail lokasi (opsional, hanya untuk responder). Jangan tulis koordinat rumah."
             className="w-full rounded border p-2 text-sm"
           />
-          <p className="text-xs text-stone-500">
+          <p className="text-xs text-stone-700">
             Detail lokasi tidak ditampilkan ke publik.
           </p>
         </fieldset>
@@ -159,7 +159,7 @@ export default async function LaporkanPage({
         </button>
       </form>
 
-      <p className="text-sm text-stone-500">
+      <p className="text-sm text-stone-700">
         Laporan terkirim tapi belum dijawab? Tetap hubungi{" "}
         <Link href="/edukasi">kontak resmi</Link> untuk kejadian mendesak.
       </p>
@@ -177,7 +177,7 @@ function SignGroup({
   return signGroupOptions.map((s) => (
     <label key={species + s} className="flex items-center gap-2 text-sm">
       <input type="checkbox" name="observed_signs" value={s} />
-      <span className="text-stone-500">[{species}]</span> {s}
+      <span className="text-stone-700">[{species}]</span> {s}
     </label>
   ));
 }

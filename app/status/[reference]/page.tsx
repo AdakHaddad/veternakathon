@@ -49,8 +49,8 @@ export default async function StatusPage({
             {report.reference}
           </p>
           <p className="mt-1 text-sm text-emerald-900/80">
-            Simpan nomor ini. PEMANTAUAN STATUS: Anda bisa kembali ke beranda
-            dan buka tautan &ldquo;Cek status&rdquo; dengan nomor ini.
+            Simpan nomor ini untuk membuka status di halaman
+            &ldquo;Cek status&rdquo;.
           </p>
         </div>
       ) : null}
@@ -61,7 +61,7 @@ export default async function StatusPage({
             Laporan{" "}
             <span className="font-mono">{report.reference}</span>
           </h1>
-          <span className="text-sm text-stone-500">
+          <span className="text-sm text-stone-700">
             Dikirim: {new Date(report.created_at).toLocaleDateString("id-ID")}
           </span>
         </div>
@@ -75,7 +75,7 @@ export default async function StatusPage({
             <span className="font-medium">
               {VERIFICATION_LABEL_ID[report.verification_status]}
             </span>{" "}
-            <span className="text-stone-500">
+            <span className="text-stone-700">
               (laporan warga belum otomatis dianggap terkonfirmasi)
             </span>
           </p>
@@ -121,7 +121,7 @@ export default async function StatusPage({
             <Item label="Catatan pelapor" value={report.observed_signs_note} />
           ) : null}
         </dl>
-        <p className="mt-2 text-xs text-stone-500">
+        <p className="mt-2 text-xs text-stone-700">
           Detail lokasi dan kontak tidak ditampilkan di halaman ini.
         </p>
       </div>
@@ -134,7 +134,7 @@ export default async function StatusPage({
             jawaban Anda agar ada dalam riwayat.
           </p>
           {/* formviel: informant add note is a responder-only flow in this prototype */}
-          <p className="mt-2 text-xs text-stone-500">
+          <p className="mt-2 text-xs text-stone-700">
             Prototipe ini belum menerima balasan informasi dari pelapor secara
             langsung; gunakan kontak responder yang tercantum dalam status
             hasil.
@@ -149,7 +149,7 @@ export default async function StatusPage({
             <li key={a.id} className="border-b pb-2 last:border-0">
               <p className="font-medium">{STATUS_ACTION_LABEL[a.action_type] ?? a.action_type}</p>
               {a.note ? <p className="text-stone-600">{a.note}</p> : null}
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-stone-600">
                 {new Date(a.created_at).toLocaleString("id-ID")} — {a.actor_name}
               </p>
             </li>
@@ -161,7 +161,7 @@ export default async function StatusPage({
         <div className="rounded-lg border bg-white p-5">
           <h2 className="font-semibold">Hasil (dalam uji coba)</h2>
           <p className="text-sm">{report.outcome_summary}</p>
-          <p className="mt-1 text-xs text-stone-500">
+          <p className="mt-1 text-xs text-stone-700">
             Sumber: {report.outcome_source ?? "-"} ·{" "}
             {report.outcome_verified
               ? "Hasil ini berasal dari pihak yang diberi wewenang."
@@ -194,7 +194,7 @@ const STATUS_ACTION_LABEL: Record<string, string> = {
 function Item({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs uppercase tracking-wide text-stone-400">{label}</dt>
+      <dt className="text-xs uppercase tracking-wide text-stone-600">{label}</dt>
       <dd>{value}</dd>
     </div>
   );

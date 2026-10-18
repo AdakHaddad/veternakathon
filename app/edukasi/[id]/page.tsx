@@ -17,7 +17,7 @@ export default async function EdukasiDetailPage({
         ← Semua materi
       </Link>
       <div className="rounded-lg border bg-white p-5">
-        <p className="text-xs uppercase tracking-wide text-stone-400">
+        <p className="text-xs uppercase tracking-wide text-stone-600">
           {e.topic} · untuk {e.species_scope.join(", ")}
         </p>
         <h1 className="mt-1 text-xl font-bold">{e.title}</h1>
@@ -53,7 +53,7 @@ function Meta({
 }) {
   return (
     <div className="flex gap-2">
-      <dt className="w-32 shrink-0 text-xs uppercase tracking-wide text-stone-400">
+      <dt className="w-32 shrink-0 text-xs uppercase tracking-wide text-stone-600">
         {label}
       </dt>
       <dd className="break-all">

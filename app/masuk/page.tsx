@@ -33,7 +33,7 @@ export default async function MasukPage({
             <span>
               <span className="font-medium">{p.display_name}</span>
               <br />
-              <span className="text-stone-500">
+              <span className="text-stone-700">
                 Peran: {p.role === "admin" ? "Administrator" : "Responder"} ·
                 Verifikasi: {p.professional_verification_status} · Wilayah:
                 Sleman
