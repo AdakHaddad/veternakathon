@@ -251,6 +251,39 @@ export async function updateReport(formData: FormData) {
   redirect(`/responder/${report.reference}?ok=1`);
 }
 
+export async function addReporterInfo(formData: FormData) {
+  const ref = String(formData.get("reference") ?? "");
+  const info = String(formData.get("information") ?? "").trim();
+  const name = String(formData.get("from_name") ?? "").trim() || "Pelapor";
+  const db = getDb();
+  const report = db.reports.find((r) => r.reference === ref);
+  if (!report || !info) {
+    redirect(`/status/${ref}?error=info-kosong`);
+  }
+  const now = nowIso();
+  db.report_actions.push({
+    id: newId("act"),
+    report_id: report.id,
+    actor_id: "reporter",
+    actor_name: name,
+    action_type: "information_added",
+    note: info,
+    created_at: now,
+  });
+  db.audit_events.push({
+    id: newId("aud"),
+    actor_id: "reporter",
+    event_type: "information_added",
+    target_type: "report",
+    target_id: report.id,
+    created_at: now,
+    metadata: null,
+  });
+  report.updated_at = now;
+  save();
+  redirect(`/status/${report.reference}?ok=1`);
+}
+
 export async function signOut() {
   const store = await cookies();
   store.delete(SESSION_COOKIE);

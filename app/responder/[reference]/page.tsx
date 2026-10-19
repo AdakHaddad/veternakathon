@@ -59,27 +59,31 @@ export default async function ResponderReportPage({
   const targets = TRANSITIONS[report.workflow_status] ?? [];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <div>
-        <Link href="/responder" className="text-sm text-emerald-700 hover:underline">
+        <Link
+          href="/responder"
+          className="text-sm font-medium text-emerald-700 hover:underline"
+        >
           ← Antrean
         </Link>
-        <h1 className="text-xl font-bold">
+        <h1 className="mt-2 text-2xl font-bold">
           Laporan <span className="font-mono">{report.reference}</span>
         </h1>
-        <p className="text-sm text-stone-600">
+        <p className="mt-1 text-sm text-stone-600">
           {STATUS_LABEL_ID[report.workflow_status]} · Verifikasi:{" "}
           {VERIFICATION_LABEL_ID[report.verification_status]} · Dibuat{" "}
           {new Date(report.created_at).toLocaleString("id-ID")}
         </p>
       </div>
+
       {ok ? (
-        <p className="rounded border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-900">
+        <p className="rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-sm font-medium text-emerald-900">
           Perubahan tersimpan dan tercatat di riwayat/audit.
         </p>
       ) : null}
       {error ? (
-        <p className="rounded border border-red-300 bg-red-50 p-3 text-sm text-red-800">
+        <p className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-800">
           {error === "transisi-tidak-valid"
             ? "Perubahan status tidak diizinkan oleh alur."
             : error === "kosong"
@@ -88,10 +92,10 @@ export default async function ResponderReportPage({
         </p>
       ) : null}
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <section className="rounded-lg border bg-white p-4">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
           <h2 className="font-semibold">Rincian laporan</h2>
-          <dl className="mt-2 space-y-1 text-sm">
+          <dl className="mt-3 space-y-2 text-sm">
             <Row label="Ternak" value={report.species} />
             <Row label="Tanda" value={report.observed_signs.join(", ") || "-"} />
             {report.observed_signs_note ? (
@@ -102,36 +106,32 @@ export default async function ResponderReportPage({
               value={
                 report.onset_at
                   ? new Date(report.onset_at).toLocaleDateString("id-ID")
-                  : "tidak diketahui"
+                  : "-"
               }
             />
             <Row
               label="Terkena / mati"
-              value={`${report.affected_count ?? "tk"} / ${report.dead_count ?? "tk"}`}
+              value={`${report.affected_count ?? "-"} / ${report.dead_count ?? "-"}`}
             />
             <Row label="Wilayah" value={getRegionName(report.region_id)} />
             <Row
-              label="Detail lokasi (terbatas)"
-              value={report.restricted_location_detail ?? "(tidak diisi)"}
+              label="Detail lokasi"
+              value={report.restricted_location_detail ?? "-"}
             />
-            <Row label="Kontak pelapor" value={report.reporter_contact ?? "(tidak diisi)"} />
+            <Row label="Kontak pelapor" value={report.reporter_contact ?? "-"} />
           </dl>
-          <p className="mt-2 text-xs text-stone-700">
-            Data Batasi ini hanya untuk kebutuhan operasional. Jangan
-            memperlihatkan di muka umum. Laporan itu masih data SIMULASI.
-          </p>
         </section>
 
-        <section className="rounded-lg border bg-white p-4">
+        <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
           <h2 className="font-semibold">Update laporan</h2>
-          <form action={updateReport} className="mt-2 space-y-3 text-sm">
+          <form action={updateReport} className="mt-3 space-y-3 text-sm">
             <input type="hidden" name="reference" value={report.reference} />
             <div>
               <label className="font-medium">Status alur</label>
               <select
                 name="workflow_status"
                 defaultValue=""
-                className="mt-1 w-full rounded border p-2"
+                className="input-el mt-1 w-full"
               >
                 <option value="">(tidak diubah)</option>
                 {WORKFLOW_STATUSES.filter((s) => s !== report.workflow_status).map(
@@ -149,7 +149,7 @@ export default async function ResponderReportPage({
               <select
                 name="verification_status"
                 defaultValue=""
-                className="mt-1 w-full rounded border p-2"
+                className="input-el mt-1 w-full"
               >
                 <option value="">(tidak diubah)</option>
                 <option value="unverified">Belum terverifikasi</option>
@@ -164,7 +164,7 @@ export default async function ResponderReportPage({
               <select
                 name="assign_to"
                 defaultValue=""
-                className="mt-1 w-full rounded border p-2"
+                className="input-el mt-1 w-full"
               >
                 <option value="">(tidak diubah)</option>
                 {responders.map((p) => (
@@ -180,7 +180,7 @@ export default async function ResponderReportPage({
                 name="note"
                 rows={2}
                 placeholder="mis. 'Akan melakukan kunjungan Kamis', 'Meminta foto kandang'"
-                className="mt-1 w-full rounded border p-2"
+                className="input-el mt-1 w-full"
               />
             </div>
             <div>
@@ -190,41 +190,49 @@ export default async function ResponderReportPage({
               <input
                 name="outcome_summary"
                 placeholder="mis. hasil pemeriksaan lapangan"
-                className="mt-1 w-full rounded border p-2"
+                className="input-el mt-1 w-full"
               />
               <input
                 name="outcome_source"
                 placeholder="sumber, mis. responder UPT Puskeswan"
-                className="mt-1 w-full rounded border p-2"
+                className="input-el mt-2 w-full"
               />
             </div>
             <button
               type="submit"
-              className="w-full rounded-md bg-emerald-700 px-4 py-2 font-medium text-white hover:bg-emerald-800"
+              className="w-full rounded-xl bg-emerald-700 px-4 py-2.5 font-semibold text-white transition hover:bg-emerald-800"
             >
               Simpan perubahan
             </button>
-            <p className="text-xs text-stone-700">
-              Perubahan dan siapa yang mengubahnya (actor) tercatat lengkap di
-              riwayat dan audit.
-            </p>
           </form>
         </section>
       </div>
 
-      <section className="rounded-lg border bg-white p-4">
+      <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
         <h2 className="font-semibold">Riwayat tindakan</h2>
-        <ul className="mt-2 space-y-2 text-sm">
-          {actions.map((a) => (
-            <li key={a.id} className="border-b pb-2 last:border-0">
-              <p className="font-medium">{ACTION_LABEL[a.action_type] ?? a.action_type}</p>
-              {a.note ? <p className="text-stone-600">{a.note}</p> : null}
-              <p className="text-xs text-stone-600">
-                {new Date(a.created_at).toLocaleString("id-ID")} — {a.actor_name}
-              </p>
+        <ol className="mt-3 space-y-0">
+          {actions.map((a, i) => (
+            <li key={a.id} className="flex gap-3">
+              <div className="flex flex-col items-center">
+                <span className="mt-1.5 size-2.5 shrink-0 rounded-full bg-emerald-600" />
+                {i < actions.length - 1 ? (
+                  <span className="w-px flex-1 bg-stone-200" />
+                ) : null}
+              </div>
+              <div className="pb-4">
+                <p className="text-sm font-semibold">
+                  {ACTION_LABEL[a.action_type] ?? a.action_type}
+                </p>
+                {a.note ? (
+                  <p className="mt-0.5 text-sm text-stone-600">{a.note}</p>
+                ) : null}
+                <p className="mt-0.5 text-xs text-stone-500">
+                  {new Date(a.created_at).toLocaleString("id-ID")} — {a.actor_name}
+                </p>
+              </div>
             </li>
           ))}
-        </ul>
+        </ol>
       </section>
     </div>
   );
@@ -232,8 +240,8 @@ export default async function ResponderReportPage({
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex gap-2">
-      <span className="w-40 shrink-0 text-xs uppercase tracking-wide text-stone-600">
+    <div className="flex gap-2 border-b border-dashed border-stone-100 pb-1.5 last:border-0">
+      <span className="w-40 shrink-0 text-xs uppercase tracking-wide text-stone-500">
         {label}
       </span>
       <span>{value}</span>
