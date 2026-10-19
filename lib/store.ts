@@ -1,6 +1,7 @@
 import "server-only";
 
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import type {
   AuditEvent,
@@ -12,7 +13,27 @@ import type {
   Region,
 } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
+// Serverless platforms (e.g. Vercel) have a read-only filesystem, so fall back
+// to a temp directory; data then lives only for the instance lifetime.
+function resolveDataDir(): string {
+  const candidates = [
+    process.env.DATA_DIR,
+    path.join(process.cwd(), ".data"),
+    path.join(os.tmpdir(), "vet-region-data"),
+  ].filter((p): p is string => Boolean(p));
+  for (const dir of candidates) {
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+      fs.accessSync(dir, fs.constants.W_OK);
+      return dir;
+    } catch {
+      // try the next candidate
+    }
+  }
+  return candidates[candidates.length - 1];
+}
+
+const DATA_DIR = resolveDataDir();
 const DB_PATH = path.join(DATA_DIR, "db.json");
 
 function seed(): Db {
@@ -230,8 +251,12 @@ function load(): Db {
 }
 
 function persist(db: Db) {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  try {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  } catch {
+    // Read-only filesystem (e.g. serverless): keep data in memory for this instance.
+  }
 }
 
 declare global {
