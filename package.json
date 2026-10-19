@@ -1,11 +1,28 @@
 {
-  "name": "vet-region-workspace",
+  "name": "app",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm --prefix app run dev",
-    "build": "npm --prefix app run build",
-    "start": "npm --prefix app run start",
-    "lint": "npm --prefix app run lint",
-    "e2e": "npm --prefix app run e2e"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "e2e": "node scripts/e2e.js"
+  },
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "playwright": "^1.64.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
